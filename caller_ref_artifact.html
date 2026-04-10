@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VDX Cold Call Quick Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #51014B;
+    --plum-mid: #7A0F72;
+    --plum-light: #EDE0EC;
+    --coral: #E86F5F;
+    --coral-light: #FDF0EE;
+    --cream: #F4F2EC;
+    --cream-dark: #E8E4DA;
+    --white: #FFFFFF;
+    --black: #111111;
+    --gray: #555555;
+    --gray-light: #888888;
+    --green: #1A5C35;
+    --green-bg: #E6F4ED;
+    --red: #A82828;
+    --red-bg: #FAEAEA;
+    --amber: #7A5200;
+    --amber-bg: #FFF4D6;
+    --blue: #1A4A80;
+    --blue-bg: #E8F0FA;
+    --border: #E0DDD5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--black);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--plum);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 52px;
+    border-bottom: 3px solid var(--coral);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+  .nav-left { display: flex; align-items: center; gap: 16px; }
+  .nav-logo { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
+  .nav-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.2); }
+  .nav-tabs { display: flex; gap: 2px; }
+  .nav-tab {
+    padding: 6px 14px;
+    font-size: 12px; font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    border-radius: 4px; cursor: pointer;
+    transition: all 0.15s;
+    border: none; background: transparent;
+    letter-spacing: 0.02em;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-tab:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.08); }
+  .nav-tab.active { color: #fff; background: rgba(255,255,255,0.15); }
+  .nav-right { font-size: 10.5px; color: rgba(255,255,255,0.38); font-family: 'DM Mono', monospace; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .wrapper { max-width: 1020px; margin: 0 auto; padding: 28px 32px 32px; }
+
+  .page-header { margin-bottom: 24px; }
+  .page-header h2 { font-size: 20px; font-weight: 700; color: var(--plum); letter-spacing: -0.3px; }
+  .page-header p  { font-size: 12.5px; color: var(--gray-light); margin-top: 3px; }
+
+  .st { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .st h3 {
+    font-size: 9.5px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; background: var(--plum);
+    padding: 4px 10px; border-radius: 3px;
+    white-space: nowrap;
+  }
+  .st-line { flex: 1; height: 1px; background: var(--border); }
+
+  .section { margin-bottom: 28px; }
+
+  /* CHECKLIST */
+  .checklist { display: flex; flex-direction: column; gap: 5px; }
+  .ci {
+    display: flex; align-items: center; gap: 13px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 7px; padding: 11px 15px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .ci:hover { border-color: var(--plum); box-shadow: 0 1px 6px rgba(81,1,75,0.08); }
+  .cn {
+    width: 27px; height: 27px; background: var(--plum);
+    color: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .ct strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 1px; }
+  .ct span   { font-size: 11.5px; color: var(--gray); }
+
+  .cred-note {
+    background: var(--plum-light); border-radius: 6px;
+    padding: 9px 14px; font-size: 12px; color: var(--plum); margin-top: 7px;
+  }
+  .cred-note strong { font-weight: 700; }
+
+  /* PHASES */
+  .phases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .phase {
+    background: var(--white); border-radius: 7px;
+    border: 1.5px solid var(--plum); overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .phase:hover { box-shadow: 0 2px 12px rgba(81,1,75,0.12); }
+  .phase.coral { border-color: var(--coral); }
+  .phase.coral:hover { box-shadow: 0 2px 12px rgba(232,111,95,0.15); }
+
+  .ph {
+    background: var(--plum); padding: 9px 13px;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .phase.coral .ph { background: var(--coral); }
+  .pn {
+    width: 26px; height: 26px;
+    background: rgba(255,255,255,0.18); border-radius: 50%;
+    color: #fff; font-size: 10.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .pt h4 { color: #fff; font-size: 12.5px; font-weight: 700; }
+  .pt p  { color: rgba(255,255,255,0.7); font-size: 10.5px; }
+
+  .pb { padding: 11px 13px; display: flex; flex-direction: column; gap: 7px; }
+
+  .sb {
+    background: #F5EEF4; border-radius: 4px;
+    padding: 7px 9px; color: var(--plum);
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    line-height: 1.55;
+  }
+  .phase.coral .sb { background: var(--coral-light); color: #8E2A1A; }
+
+  .or { display: flex; align-items: baseline; gap: 5px; font-size: 11.5px; }
+  .ty { color: var(--green);  font-weight: 700; white-space: nowrap; }
+  .tn { color: #CC8800;       font-weight: 700; white-space: nowrap; }
+  .tr { color: var(--red);    font-weight: 700; white-space: nowrap; }
+  .or span { color: var(--gray); }
+
+  .fn {
+    font-size: 10.5px; color: var(--gray-light); font-style: italic;
+    padding-top: 5px; border-top: 1px solid #F0EDE6; line-height: 1.45;
+  }
+  .fn.red { color: var(--red); font-style: normal; font-weight: 600; border-color: #F5C5C5; }
+
+  .ns { background: var(--red-bg); border-radius: 4px; padding: 6px 9px; font-size: 11.5px; }
+  .ns .lbl { color: var(--red); font-weight: 700; margin-bottom: 2px; font-size: 10.5px; }
+  .ns .itm { color: var(--gray); line-height: 1.55; }
+
+  .si { background: var(--green-bg); border-radius: 4px; padding: 6px 9px; font-size: 11.5px; }
+  .si .lbl { color: var(--green); font-weight: 700; margin-bottom: 2px; font-size: 10.5px; }
+  .si .itm { color: var(--gray); line-height: 1.55; }
+
+  /* PAGE 2 */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .col { display: flex; flex-direction: column; gap: 20px; }
+
+  .abp-wrap { display: flex; flex-direction: column; gap: 5px; }
+  .abp { border-radius: 6px; padding: 11px 13px; }
+  .abp-a { background: var(--plum-light); border-left: 3px solid var(--plum); }
+  .abp-b { background: var(--coral-light); border-left: 3px solid var(--coral); }
+  .abp-p { background: var(--blue-bg);     border-left: 3px solid var(--blue); }
+  .abp h4 { font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 1px; }
+  .abp-a h4 { color: var(--plum); }
+  .abp-b h4 { color: #8E2A1A; }
+  .abp-p h4 { color: var(--blue); }
+  .abp .sub { font-size: 10.5px; color: var(--gray-light); font-style: italic; margin-bottom: 7px; }
+  .aline {
+    font-size: 12px; color: var(--black);
+    padding: 3.5px 0; border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.4;
+  }
+  .aline:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .dk {
+    background: var(--amber-bg); border: 1px solid #E8C060;
+    border-radius: 6px; padding: 11px 13px;
+  }
+  .dk h4 { font-size: 11.5px; font-weight: 700; color: var(--amber); margin-bottom: 7px; }
+  .dk .sc {
+    font-size: 11px; color: #5A3C00; line-height: 1.55;
+    background: rgba(255,255,255,0.5); border-radius: 4px;
+    padding: 7px 9px; margin-bottom: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+  .dk .nt { font-size: 10.5px; color: var(--gray-light); font-style: italic; }
+
+  .obj-list { display: flex; flex-direction: column; gap: 5px; }
+  .obj {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 6px; padding: 9px 12px;
+    transition: border-color 0.15s;
+  }
+  .obj:hover { border-color: var(--plum); }
+  .obj .pr { font-size: 12px; font-weight: 600; color: var(--plum); margin-bottom: 3px; }
+  .obj .re { font-size: 11.5px; color: var(--gray); line-height: 1.5; }
+
+  .std-box {
+    background: var(--white); border: 2px solid var(--plum);
+    border-radius: 7px; padding: 13px 15px;
+  }
+  .std-eq { display: flex; align-items: center; gap: 9px; margin-bottom: 5px; flex-wrap: wrap; }
+  .std-eq .pt { font-size: 13.5px; font-weight: 700; color: var(--plum); }
+  .std-eq .pl { font-size: 18px; font-weight: 700; color: var(--coral); line-height: 1; }
+  .std-box .nt { font-size: 11.5px; color: var(--gray-light); font-style: italic; }
+
+  .sig-list { display: flex; flex-direction: column; gap: 3px; }
+  .sig {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 4px;
+    font-size: 12px; font-weight: 500;
+  }
+  .sig.g { background: var(--green-bg); color: var(--green); }
+  .sig.r { background: var(--red-bg);   color: var(--red); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dg { background: var(--green); }
+  .dr { background: var(--red); }
+
+  .nev-list { display: flex; flex-direction: column; gap: 5px; }
+  .nev {
+    background: var(--red-bg); border: 1px solid #E8B0B0;
+    border-radius: 6px; padding: 9px 12px;
+  }
+  .nev strong { display: block; font-size: 12px; color: var(--red); font-weight: 700; margin-bottom: 2px; }
+  .nev span   { font-size: 11.5px; color: var(--gray); line-height: 1.45; }
+
+  .type-list { display: flex; flex-direction: column; gap: 5px; }
+  .trow {
+    display: flex; align-items: flex-start; gap: 9px;
+    padding: 9px 12px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 6px;
+  }
+  .tbdg {
+    font-size: 9.5px; font-weight: 700; color: #fff;
+    padding: 3px 8px; border-radius: 3px;
+    white-space: nowrap; flex-shrink: 0; margin-top: 1px;
+  }
+  .bp { background: var(--plum); }
+  .bc { background: var(--coral); }
+  .bb { background: var(--blue); }
+  .trow p { font-size: 11.5px; color: var(--gray); line-height: 1.5; }
+  .trow p strong { color: var(--red); font-weight: 700; }
+
+  .footer-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--plum); padding: 9px 32px;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 11px; font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    border-top: 2px solid var(--coral);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+  }
+  .footer-bar span { color: #fff; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <div class="nav-logo">VDX Cold Call</div>
+    <div class="nav-sep"></div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="show('p1',this)">Pre-Dial + Call Structure</button>
+      <button class="nav-tab" onclick="show('p2',this)">ABP + Standards</button>
+    </div>
+  </div>
+  <div class="nav-right">Q2 2026 · Booked Isn't Enough. Earned Is.</div>
+</nav>
+
+<!-- PAGE 1 -->
+<div id="p1" class="page active">
+  <div class="wrapper">
+    <div class="page-header">
+      <h2>Pre-Dial Checklist + Call Structure</h2>
+      <p>Five things before you dial. Four phases on every call. No exceptions.</p>
+    </div>
+
+    <div class="section">
+      <div class="st"><h3>Before You Dial — Every Campaign, Every Time</h3><div class="st-line"></div></div>
+      <div class="checklist">
+        <div class="ci"><div class="cn">1</div><div class="ct"><strong>Read the Quick Start Guide top to bottom</strong><span>ICP first. Main problem second. Bar pitch third. It's a page and a half — no skipping.</span></div></div>
+        <div class="ci"><div class="cn">2</div><div class="ct"><strong>Scan the company website</strong><span>Know how they present to the outside world. Know how to pronounce their name.</span></div></div>
+        <div class="ci"><div class="cn">3</div><div class="ct"><strong>Check the event name and dates</strong><span>Know what you're inviting them to. Know the event name and the audience.</span></div></div>
+        <div class="ci"><div class="cn">4</div><div class="ct"><strong>Open and test the booking link</strong><span>Make sure it works and you know what the prospect will see before you're live on a call.</span></div></div>
+        <div class="ci"><div class="cn">5</div><div class="ct"><strong>Say your bar pitch out loud</strong><span>If you've never said it out loud, you're saying it for the first time on a real call. They'll hear it.</span></div></div>
+      </div>
+      <div class="cred-note"><strong>Credibility, not expertise.</strong> &nbsp;You don't need to know everything about the customer. You need to sound like someone worth staying on the line with. Those are different things.</div>
+    </div>
+
+    <div class="section">
+      <div class="st"><h3>The Four Phases — Every Call, Every Time</h3><div class="st-line"></div></div>
+      <div class="phases-grid">
+
+        <div class="phase">
+          <div class="ph"><div class="pn">01</div><div class="pt"><h4>Open</h4><p>Confirm attendance. Create curiosity.</p></div></div>
+          <div class="pb">
+            <div class="sb">"Hey [Name] — this is [Alias] with [Company]. Quick question — are you heading to [Event]?"</div>
+            <div class="or"><span class="ty">YES →</span><span>"You'll know in about 10 seconds if this is worth your time."</span></div>
+            <div class="or"><span class="tn">NO →</span><span>Strong ICP fit? Pivot to virtual. Otherwise move on.</span></div>
+            <div class="fn">Confirm attendance first. Don't pitch until you know they're going.</div>
+          </div>
+        </div>
+
+        <div class="phase coral">
+          <div class="ph"><div class="pn">02</div><div class="pt"><h4>Hook</h4><p>Name their world before pitching yours.</p></div></div>
+          <div class="pb">
+            <div class="sb">"A lot of teams we connect with at these shows are dealing with [CORE PROBLEM] — is that something you're running into?"</div>
+            <div class="or"><span class="ty">ENGAGES →</span><span>Engagement signal confirmed. Move to close.</span></div>
+            <div class="or"><span class="tn">UNSURE →</span><span>Backup pain point or bar pitch. Apply ABP.</span></div>
+            <div class="fn">Lead with their world. Don't feature-dump before they've acknowledged relevance.</div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="ph"><div class="pn">03</div><div class="pt"><h4>Close</h4><p>Propose a time. Stay firm. No Gumby language.</p></div></div>
+          <div class="pb">
+            <div class="sb">"What day are you planning to walk the show floor?" → "Events get hectic — let me grab some time on your calendar. Does [TIME 1] or [TIME 2] work?"</div>
+            <div class="si"><div class="lbl">Say this:</div><div class="itm">"I'll follow up before the meeting to make sure it still works."<br>"If your schedule shifts, we can always adjust."</div></div>
+            <div class="ns"><div class="lbl">Never this:</div><div class="itm">"No worries if you can't make it" &nbsp;·&nbsp; "Feel free to cancel" &nbsp;·&nbsp; "Totally low-key just drop by"</div></div>
+          </div>
+        </div>
+
+        <div class="phase coral">
+          <div class="ph"><div class="pn">04</div><div class="pt"><h4>Confirm</h4><p>Don't hang up until it's in their inbox.</p></div></div>
+          <div class="pb">
+            <div class="sb">"You should see that come through right now." → Stay on the line. Walk them through it if needed.</div>
+            <div class="or"><span class="ty">✓</span><span>They confirm receipt — the meeting exists.</span></div>
+            <div class="or"><span class="tr">✗</span><span>If it's not in their calendar, it does not exist.</span></div>
+            <div class="fn">Silence is fine. Do not fill it with more talking. Give them a moment.</div>
+            <div class="fn red">Virtual? Do NOT use an event-specific link. Alert FDE immediately.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="p2" class="page">
+  <div class="wrapper">
+    <div class="page-header">
+      <h2>ABP Framework + Meeting Standards</h2>
+      <p>Handle every objection. Know what counts. Know what doesn't.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="col">
+
+        <div>
+          <div class="st"><h3>ABP — Every Objection, Every Time</h3><div class="st-line"></div></div>
+          <div class="abp-wrap">
+            <div class="abp abp-a">
+              <h4>ACKNOWLEDGE</h4><div class="sub">Validate what they said. Normalize it. Show empathy.</div>
+              <div class="aline">"That makes sense."</div>
+              <div class="aline">"Totally fair."</div>
+              <div class="aline">"You're not the first person to say that today."</div>
+              <div class="aline">"I get it — your time is valuable."</div>
+            </div>
+            <div class="abp abp-b">
+              <h4>BRIDGE</h4><div class="sub">Reframe toward the meeting. Shrink the ask.</div>
+              <div class="aline">"That's exactly why this conversation is worth having."</div>
+              <div class="aline">"Most teams say the same thing before they actually see it."</div>
+              <div class="aline">"It's 20 minutes — if it's not relevant, you'll know pretty quickly."</div>
+            </div>
+            <div class="abp abp-p">
+              <h4>PIVOT</h4><div class="sub">Get back to the ask. Always end with a question.</div>
+              <div class="aline">"What day are you planning to walk the show floor?"</div>
+              <div class="aline">"Since you're already going to be there, let's lock something in."</div>
+              <div class="aline">"Let me just find something while I have you."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dk">
+          <h4>When you don't know the answer</h4>
+          <div class="sc">"Great question — that's exactly what this meeting is for. Our team would walk you through that. What day are you planning to walk the floor?"</div>
+          <div class="nt">Works for product, company, and proof questions. You don't need the answer. The meeting is the answer.</div>
+        </div>
+
+        <div>
+          <div class="st"><h3>Common Objections</h3><div class="st-line"></div></div>
+          <div class="obj-list">
+            <div class="obj"><div class="pr">"Not familiar with what you guys do"</div><div class="re">Fair — we help teams with [core problem]. Best way to see it is in person. What day are you walking the floor?</div></div>
+            <div class="obj"><div class="pr">"We're already working with someone like this"</div><div class="re">That makes sense. Not about replacing — worth seeing what we do differently. It's 20 minutes.</div></div>
+            <div class="obj"><div class="pr">"Not sure this is relevant to us"</div><div class="re">Fair point. Are you dealing with [core problem] at all? If it's even a little relevant, worth a quick chat.</div></div>
+            <div class="obj"><div class="pr">"Too busy / bad time"</div><div class="re">Totally get it. You're already going to be there — just about finding a window. What day works?</div></div>
+            <div class="obj"><div class="pr">"I'm not the decision maker"</div><div class="re">No problem. Is this relevant to what your team does day to day? That's really all I'm checking right now.</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col">
+
+        <div>
+          <div class="st"><h3>Meeting Booked Standard</h3><div class="st-line"></div></div>
+          <div class="std-box">
+            <div class="std-eq">
+              <div class="pt">Time confirmed</div>
+              <div class="pl">+</div>
+              <div class="pt">At least ONE engagement signal</div>
+            </div>
+            <div class="nt">Both required. One without the other is not a meeting booked.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="st"><h3>Engagement Signals — Green Flags</h3><div class="st-line"></div></div>
+          <div class="sig-list">
+            <div class="sig g"><div class="dot dg"></div>References a specific pain or challenge unprompted</div>
+            <div class="sig g"><div class="dot dg"></div>Brings up a competitor or existing solution</div>
+            <div class="sig g"><div class="dot dg"></div>Asks a clarifying question about the product</div>
+            <div class="sig g"><div class="dot dg"></div>Volunteers context about their role or team</div>
+            <div class="sig g"><div class="dot dg"></div>Energy shifts — they slow down, they engage</div>
+            <div class="sig g"><div class="dot dg"></div>Pulls up their calendar while still on the call</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="st"><h3>Red Flags — Not a Real Commitment</h3><div class="st-line"></div></div>
+          <div class="sig-list">
+            <div class="sig r"><div class="dot dr"></div>"Sure whatever works"</div>
+            <div class="sig r"><div class="dot dr"></div>"Yeah go ahead and send something over"</div>
+            <div class="sig r"><div class="dot dr"></div>Agreed before you explained what the meeting was about</div>
+            <div class="sig r"><div class="dot dr"></div>Call under 60 seconds with no real back and forth</div>
+            <div class="sig r"><div class="dot dr"></div>"Mm-hmm" with nothing to follow it</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="st"><h3>Never a Meeting — Do Not Book</h3><div class="st-line"></div></div>
+          <div class="nev-list">
+            <div class="nev"><strong>Existing customer or partner</strong><span>Not net new pipeline. Log as Connection Initiated. Pass context to FDE if worth sharing.</span></div>
+            <div class="nev"><strong>The Uno Reverse</strong><span>Prospect is pitching you back. Disengage politely. Do not book it.</span></div>
+            <div class="nev"><strong>Third party proxy — "Jane is the right person"</strong><span>Jane isn't on the call. Jane hasn't agreed to anything. Log Connection Initiated and pass context to FDE.</span></div>
+            <div class="nev"><strong>The Gumby close</strong><span>You said "no worries if you can't make it." That meeting is already soft. Your language has to match the commitment.</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="st"><h3>Meeting Type</h3><div class="st-line"></div></div>
+          <div class="type-list">
+            <div class="trow"><div class="tbdg bp">In-person 1:1</div><p>Prospect confirms they're attending the event. Default.</p></div>
+            <div class="trow"><div class="tbdg bc">Registration</div><p>Customer-hosted event or activation. Follow script guidance.</p></div>
+            <div class="trow"><div class="tbdg bb">Virtual</div><p>Strong ICP fit + NOT attending. Alert FDE immediately. <strong>Do NOT use an event-specific booking link.</strong> Wrong type = no show.</p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-bar">
+  You are delivering on a customer's investment. &nbsp;<span>Book with that in mind.</span>
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
